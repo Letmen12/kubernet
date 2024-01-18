@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: computer-service-1
+  namespace: lesson
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: flask-app
+  template:
+    metadata:
+      labels:
+        app: flask-app
+    spec:
+      containers:
+        - name: computer-service-1-container
+          image: sanchirjav/computer-service-1:latest
+          resources:
+            requests:
+              cpu: 20m
+              memory: 50Mi
+            limits:
+              cpu: 30m
+              memory: 100Mi
+          ports:
+            - containerPort: 5000
